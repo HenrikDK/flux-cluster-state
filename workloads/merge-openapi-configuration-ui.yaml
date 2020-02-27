@@ -1,0 +1,36 @@
+# Merge openapi configuration deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merge-openapi-configuration-ui
+  namespace: merge-openapi
+spec:
+  selector:
+    matchLabels:
+      name: merge-openapi-configuration-ui
+  template:
+    metadata:
+      labels:
+        name: merge-openapi-configuration-ui
+    spec:
+      containers:
+        - image: henrikdk/merge-openapi-configuration-ui:48aaaa9
+          name: merge-openapi-configuration-ui
+          ports:
+            - containerPort: 13006
+              name: ui
+---
+# Merge openapi configuration Service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: merge-openapi-configuration-ui
+  name: merge-openapi-configuration-ui
+  namespace: merge-openapi
+spec:
+  ports:
+    - name: merge-openapi-configuration-ui-svc
+      port: 13006
+  selector:
+    name: merge-openapi-configuration-ui

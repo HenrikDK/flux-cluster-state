@@ -1,0 +1,36 @@
+# Merge openapi API deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merge-openapi-api
+  namespace: merge-openapi
+spec:
+  selector:
+    matchLabels:
+      name: merge-openapi-api
+  template:
+    metadata:
+      labels:
+        name: merge-openapi-api
+    spec:
+      containers:
+        - image: henrikdk/merge-openapi-api:48aaaa9
+          name: merge-openapi-api
+          ports:
+            - containerPort: 13000
+              name: api
+---
+# Merge openapi API Service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: merge-openapi-api
+  name: merge-openapi-api
+  namespace: merge-openapi
+spec:
+  ports:
+    - name: merge-openapi-api-svc
+      port: 13000
+  selector:
+    name: merge-openapi-api
