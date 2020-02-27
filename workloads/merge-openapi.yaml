@@ -1,0 +1,18 @@
+# Merge openapi API deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: merge-openapi
+  namespace: merge-openapi
+spec:
+  selector:
+    matchLabels:
+      name: merge-openapi
+  template:
+    metadata:
+      labels:
+        name: merge-openapi
+    spec:
+      containers:
+        - image: henrikdk/merge-openapi:48aaaa9
+          name: merge-openapi
