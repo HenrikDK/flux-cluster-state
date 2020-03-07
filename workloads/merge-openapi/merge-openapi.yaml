@@ -14,5 +14,8 @@ spec:
         name: merge-openapi
     spec:
       containers:
-        - image: henrikdk/merge-openapi:20200307-bb84fbe
+        - image: henrikdk/merge-openapi:20200307-bce6e8f
           name: merge-openapi
+          env:
+            - name: postgres
+              value: "Server=192.168.64.1;Port=5432;Database=henrik;User Id=postgres;Password=postgres;"
