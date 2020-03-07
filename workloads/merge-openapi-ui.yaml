@@ -14,7 +14,7 @@ spec:
         name: merge-openapi-ui
     spec:
       containers:
-        - image: henrikdk/merge-openapi-ui:48aaaa9
+        - image: henrikdk/merge-openapi-ui:20200307-bb84fbe
           name: merge-openapi-ui
           ports:
             - containerPort: 13004

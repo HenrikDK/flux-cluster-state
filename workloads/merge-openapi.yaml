@@ -14,5 +14,5 @@ spec:
         name: merge-openapi
     spec:
       containers:
-        - image: henrikdk/merge-openapi:48aaaa9
+        - image: henrikdk/merge-openapi:20200307-bb84fbe
           name: merge-openapi

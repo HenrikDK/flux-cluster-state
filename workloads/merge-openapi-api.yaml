@@ -14,7 +14,7 @@ spec:
         name: merge-openapi-api
     spec:
       containers:
-        - image: henrikdk/merge-openapi-api:48aaaa9
+        - image: henrikdk/merge-openapi-api:20200307-bb84fbe
           name: merge-openapi-api
           ports:
             - containerPort: 13000
@@ -29,6 +29,7 @@ metadata:
   name: merge-openapi-api
   namespace: merge-openapi
 spec:
+  type: NodePort
   ports:
     - name: merge-openapi-api-svc
       port: 13000
