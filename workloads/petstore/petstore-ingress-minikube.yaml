@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: petstore-ingress
+  namespace: petstore
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - host: ps-pet.test
+      http:
+        paths:
+          - path: /(.+)
+            backend:
+              serviceName: petstore-pet-api
+              servicePort: 13001
+    - host: ps-store.test
+      http:
+        paths:
+          - path: /(.+)
+            backend:
+              serviceName: petstore-store-api
+              servicePort: 13002
+    - host: ps-user.test
+      http:
+        paths:
+          - path: /(.+)
+            backend:
+              serviceName: petstore-user-api
+              servicePort: 13003

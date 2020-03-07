@@ -1,0 +1,40 @@
+# Merge openapi API deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petstore-store-api
+  namespace: petstore
+spec:
+  selector:
+    matchLabels:
+      name: petstore-store-api
+  template:
+    metadata:
+      labels:
+        name: petstore-store-api
+    spec:
+      containers:
+        - image: henrikdk/petstore-store-api:20200307-6efbb48
+          name: petstore-store-api
+          env:
+            - name: postgres
+              value: "Server=192.168.64.1;Port=5432;Database=henrik;User Id=postgres;Password=postgres;"
+          ports:
+            - containerPort: 13002
+              name: api
+---
+# Merge openapi API Service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: petstore-store-api
+  name: petstore-store-api
+  namespace: petstore
+spec:
+  type: NodePort
+  ports:
+    - name: petstore-store-api-svc
+      port: 13002
+  selector:
+    name: petstore-store-api
