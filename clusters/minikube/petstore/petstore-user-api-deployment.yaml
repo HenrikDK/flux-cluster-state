@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petstore-user-api
+  namespace: petstore
+  labels:
+    app: petstore-user-api
+spec:
+  selector:
+    matchLabels:
+      app: petstore-user-api
+  template:
+    metadata:
+      labels:
+        app: petstore-user-api
+    spec:
+      containers:
+        - name: petstore-user-api
+          image: henrikdk/petstore-user-api:20220421-74067a5
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "0.2"
+            limits:
+              memory: "128Mi"
+              cpu: "0.5"
+          ports:
+            - containerPort: 8080
+          env:
+            - name: postgres
+              value: "Server=192.168.64.1;Port=5432;Database=henrik;User Id=postgres;Password=postgres;"
+            
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: petstore-user-api
+  namespace: petstore
+spec:
+  selector:
+    app: petstore-user-api
+  ports:
+    - name: petstore-user-api
+      port: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: petstore-user-api
+  namespace: petstore
+spec:
+  rules:
+  - host: "petstore-user-api.petstore.test"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: petstore-user-api
+            port:
+              number: 8080
