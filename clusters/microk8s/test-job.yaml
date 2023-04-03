@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hello-job
+  namespace: petstore
+spec:
+  template:
+    spec:
+      containers:
+      - name: node-app-job
+        image: busybox:1.28
+        command:
+        - /bin/sh
+        - -c
+        - date; echo Hello from the Kubernetes cluster
+      restartPolicy: Never
