@@ -1518,7 +1518,7 @@ serverFiles:
           - source_labels: [__meta_kubernetes_node_name]
             regex: (.+)
             target_label: __metrics_path__
-            replacement: :10250/metrics
+            replacement: metrics
 
 
       - job_name: 'kubernetes-nodes-cadvisor'
@@ -1552,7 +1552,7 @@ serverFiles:
           - source_labels: [__meta_kubernetes_node_name]
             regex: (.+)
             target_label: __metrics_path__
-            replacement: :10250/metrics/cadvisor
+            replacement: metrics/cadvisor
 
       # Scrape config for service endpoints.
       #
