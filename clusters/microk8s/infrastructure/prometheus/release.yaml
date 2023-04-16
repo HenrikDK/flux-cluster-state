@@ -20,7 +20,7 @@ spec:
         name: prometheus
         namespace: monitoring
       version: "15.13.0"
-  interval: 1h0m0s
+  interval: 10m0s
   install:
     remediation:
       retries: 3
