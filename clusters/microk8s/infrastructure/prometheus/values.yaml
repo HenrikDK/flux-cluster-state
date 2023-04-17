@@ -821,7 +821,7 @@ serverFiles:
             target_label: service
           - source_labels: [__meta_kubernetes_pod_node_name]
             action: replace
-            target_label: node
+            target_label: kubernetes_node
 
       # Scrape config for slow service endpoints; same as above, but with a larger
       # timeout and a larger interval
