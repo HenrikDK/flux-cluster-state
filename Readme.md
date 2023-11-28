@@ -2,14 +2,11 @@
 This repository contains the cluster state for a local test cluster, using minikube.
 
 
-## 1. Setup minikube
+## 1. Setup minikube - (docker)
 
 ```
-brew install podman
 brew install minikube
-podman machine init --cpus 2 --memory 4096 --rootful 
-podman machine start
-minikube start --driver=podman
+minikube start --driver=docker
 ```
 
 ## 2. Setup flux
